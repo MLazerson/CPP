@@ -1,0 +1,92 @@
+//file_analysis.cpp
+//Malka Lazerson
+//CSI 123
+//TR
+//11:45-1:50pm
+//Scott Edwards
+//A program using file streams and i/o to read data in a file and display it
+#include <iostream>
+#include <fstream>
+#include <cctype>
+#include <stdlib.h>
+#include <iomanip>
+
+using namespace std;
+
+ int ProcessFile(ifstream &inFile, int &upper, int &Low, int &Digit, int &Punct, int &Space, int &tChars);
+
+ const int WIDTH = 6;
+
+ int main()
+ {
+  int numUp;
+  int numLow;
+  int numDigit;
+  int numPunct;
+  int numSpace;
+  int tChars;
+
+  ifstream myFile("data.txt");
+
+  exit (EXIT_FAILURE);
+
+  tChars = ProcessFile(myFile, numUp, numLow, numDigit, numPunct, numSpace, tChars);
+
+  cout<<" Data.txt has....\n";
+  cout<<" Uppercase count:   "<<setw(WIDTH)<<numUp<<endl;
+  cout<<" Lowercase count:   "<<setw(WIDTH)<<numLow<<endl;
+  cout<<" Digit count:       "<<setw(WIDTH)<<numDigit<<endl;
+  cout<<" Punctuation count:   "<<setw(WIDTH)<<numPunct<<endl;
+
+  cout<<" Total characters:    "<<setw(WIDTH)<<tChars<<endl;
+
+  myFile.close();
+  return 0;
+ }
+
+
+ int ProcessFile(ifstream &inFile, int &upper, int &Low, int &Digit, int &Punct, int &Space, int &tChars)
+{
+  char fileChar;
+  int total=0;
+  upper=Low=Digit=Space=Punct=0;
+
+  do{
+     inFile.get(fileChar);
+
+     if(inFile.eof())
+     {
+      break;
+     }
+
+     ++total;
+
+     if(isupper(fileChar))
+     {
+      ++upper;
+     }
+
+     else if(islower(fileChar))
+     {
+     ++Low;
+     }
+else if(isdigit(fileChar))
+     {
+     ++Digit;
+     }
+
+     else if(ispunct(fileChar))
+     {
+     ++Punct;
+     }
+
+     else if(isspace(fileChar))
+     {
+     ++Space;
+     }
+    }
+
+    while(true);
+
+     return total;
+ }

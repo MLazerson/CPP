@@ -1,0 +1,391 @@
+// ============================================================================
+// File: ccalc.h (Fall 2015)
+// ============================================================================
+// This is the header file for the CCalc class.
+// ============================================================================
+
+#ifndef CCALC_HEADER
+#define CCALC_HEADER
+
+class  CCalc
+{
+public:
+    // member functions
+    CCalc();
+    void    Add(double  value);
+    void    Clear();
+    void    Divide(double  value);
+    double  GetValue() const;
+    void    Multiply(double  value);
+    void    SetValue(double  newValue);
+    void    Subtract(double  value);
+
+private:
+    // data members
+    double  m_total;
+};
+
+#endif  // CCALC_HEADER
+
+
+
+
+// ============================================================================
+// file: ccalc.cpp
+// ============================================================================
+// Programmer: Malka Lazerson
+// Date: 11/11/2015
+// Class: CSCI 123 ("Intro to Programming Using C++")
+// Time: TR 11:45am
+// Instructor: Mr. Edwards
+// Project: HW18 CCalc
+//
+// Description:
+//      This file is part of a multi module HW assignment on a four func.
+//      calculator. This file implements all the functions and returns or
+//      displays a value.
+//
+// ============================================================================
+#include <iostream>
+#include <cstdlib>
+#include <cmath>
+#include <cctype>
+#include "ccalc.h"
+using namespace std;
+
+// ==== Clear ===============================================================
+//
+// This function sets "temp" to zero, thus clearing the calculator.
+//
+// Input:
+//      limit [IN]  -- "Temp"
+//
+//
+// Output: Nothing, will set "temp" to zero
+//
+//
+// ============================================================================
+void    CCalc::Clear()
+{
+
+m_total = 0;
+
+}// end of "Clear"
+
+//======Add==================================================================
+//
+// This function will add a user entered number to "value"
+//
+// Input:
+//      limit [IN]  --
+//
+//
+// Output: Nothing, will display end result
+//
+//
+// ============================================================================
+void    CCalc::Add(double  value)
+{
+
+    double    localVar;
+
+      cout<<" Enter a value to add: ";
+      cin>> localVar;
+
+      m_total  = localVar + value;
+
+
+
+
+
+}// end of "Add"
+
+
+//=========Divide==============================================================
+//
+// This function will divide a user entered number by value
+//
+// Input:
+//      limit [IN]  --
+//
+//
+// Output: Nothing, will display end result
+//
+//
+// ============================================================================
+void    CCalc::Divide(double  value)
+{
+
+    double    localVar;
+
+      cout<<" Enter a value to add: ";
+      cin>> localVar;
+
+        m_total  = localVar / value;
+}// end of "Divide"
+
+//=========GetValue============================================================
+//
+// This function will display current value
+//
+// Input:
+//      limit [IN]  -- A integer from the user
+//
+//
+// Output: A value
+//
+//
+// ============================================================================
+double  CCalc::GetValue() const
+{
+
+cout<<" The current value is: "<<m_total<<endl;
+
+}// end of "GetValue"
+
+
+
+//=========Multiply=============================================================
+//
+// This function will multiply
+//
+// Input:
+//      limit [IN]  --
+//
+//
+// Output:  Nothing, will multiply and display result
+//
+//
+// =============================================================================
+void    CCalc::Multiply(double  value)
+{
+    double    localVar;
+
+    cout<<" Enter a value to multiply: ";
+    cin>> localVar;
+    m_total = localVar * value;
+
+
+}// end of "Multiply"
+
+//=========SetValue============================================================
+//
+// This function gets a new value to use in a math function.
+//
+// Input:
+//      limit [IN]  -- "Temp"
+//
+//
+// Output:  Nothing
+//
+//
+// ============================================================================
+void    CCalc::SetValue(double  newValue)
+{
+  cout<<" Enter a value to assign: ";
+  cin>> m_total;
+
+
+}// end of "SetValue"
+
+
+
+//=========Subtract=============================================================
+//
+// This function subtracts temp from another value entered by the user
+//
+//
+// Input:
+//      limit [IN]  -- temp
+//
+//
+// Output: Nothing, subtract and display result
+//
+//
+// ============================================================================
+void  CCalc::Subtract(double  value)
+
+
+{
+
+    double    localVar;
+
+    cout<<" Enter a value to subtract: ";
+    cin>> localVar;
+
+      m_total = localVar - value;
+
+
+
+
+}// end of "Subtract"
+
+
+
+//==========CCalc==============================================================
+//
+// A constructor???
+//
+//=============================================================================
+CCalc::CCalc()
+{
+
+m_total= 0;
+
+}// end of CCalc
+// ============================================================================
+// File: main.cpp (Fall 2015)
+// ============================================================================
+// This program tests the CCalc object. A loop is entered where the user is
+// prompted for a simple mathematical operation to be performed on the CCalc
+// object. The user is allowed to manipulate the CCalc object until they
+// indicate they wish to quit.
+// ============================================================================
+
+#include    <iostream>
+#include    <cstdlib>
+#include    <cctype>
+using namespace std;
+#include    "ccalc.h"
+
+
+// function prototypes
+void    DisplayMenu(void);
+void    HandleMenuSelection(CCalc  &calc, char  menuItem);
+
+
+// ==== main ==================================================================
+//
+// ============================================================================
+
+int     main()
+{
+    CCalc       calculator;
+    char        selection;
+
+    // loop and let the user manipulate the calculator
+    do  {
+        // display the menu and get the user selection
+        DisplayMenu();
+        cout << "Please enter a selection: ";
+        cin >> selection;
+        HandleMenuSelection(calculator, selection);
+        cout << endl;
+
+        } while ('Q' != toupper(selection));
+
+    return 0;
+
+}  // end of "main"
+
+
+
+// ==== DisplayMenu ===========================================================
+//
+// This function displays the menu of options to stdout.
+//
+//
+// Input:  nothing
+//
+// Output: nothing
+//
+// ============================================================================
+
+void    DisplayMenu(void)
+{
+    cout << "Calculator Options:" << endl;
+    cout << "  [C] Clear" << endl;
+    cout << "  [T] Set Value" << endl;
+    cout << "  [V] Display Value" << endl;
+    cout << "  [A] Add" << endl;
+    cout << "  [S] Subtract" << endl;
+    cout << "  [D] Divide" << endl;
+    cout << "  [M] Multiply" << endl;
+    cout << "  [Q] Quit" << endl;
+
+}  // end of "DisplayMenu"
+
+
+
+// ==== HandleMenuSelection ===================================================
+//
+// This function handles the menu selection by examining the input char
+// parameter and using the CCalc parameter to call the appropriate CCalc member
+// function.
+//
+// Input:
+//      calc [IN/OUT]   -- a reference to an existing CCalc object
+//
+//      menuItem [IN]   -- a char representing the current menu selection
+//
+// Output:
+//      Nothing
+//
+// ============================================================================
+
+void    HandleMenuSelection(CCalc  &calc, char  menuItem)
+{
+    double  temp;
+
+    // switch on the menu selection and call the corresponding CCalc member
+    // function
+             switch(toupper(menuItem))
+                   {
+
+                   //clears temp
+                    case 'C':
+                             calc.Clear();
+                             break;
+
+                  //sets a new value
+                    case 'T':
+                             calc.SetValue(temp);
+                             break;
+                   //displays current value
+                    case 'V':
+                             calc.GetValue();
+                             break;
+                    case 'A':
+                             cout<<" Enter a value to add: ";
+                             cin>> temp;
+
+                             calc.Add(temp);
+                             break;
+
+                    case 'S':
+                             cout<<" Enter a value to subtract: ";
+                             cin>> temp;
+
+                             calc.Subtract(temp);
+                             break;
+
+                    case 'D':cout<<" Enter a value to divide: ";
+                             cin>> temp;
+
+                             calc.Divide(temp);
+   break;
+
+                    case 'M':
+                             cout<<" Enter a value to multiply: ";
+                             cin>> temp;
+
+                             calc.Multiply(temp);
+                             break;
+
+                   //quits program
+                    case 'Q':
+                             cout<<" Bye!"<<endl;
+                             exit(EXIT_SUCCESS);
+
+                    default:
+                            break;
+                   }
+
+
+}  // end of "HandleMenuSelection"
+
+
+
+
+
+

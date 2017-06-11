@@ -1,0 +1,56 @@
+//searcharray.cpp
+//Malka Lazerson
+//CSI 123
+//TR 11:45-1:50pm
+//Scott Edwards
+//Due 3/19/15
+//Program stores user enter #'s in an array (0 based)&
+// then display where certain #'s are stored.
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+
+const int NUMBERS = 10;
+//prototype
+void SearchArray(int array[], int numElems, int Targ);
+
+//main func to get numbers
+
+int main()
+{
+ int intArray[NUMBERS];
+ int index;
+ int userInt;
+
+ cout<<" Enter "<<NUMBERS<<" numbers: \n";
+//for loop to store #'s
+  for(index = 0; index < NUMBERS; ++index)
+     {
+     cout<<" # "<<index + 1<<": ";
+     cin>>intArray[index];
+     }
+     cout<<" Enter a number you used before: ";
+     cin>>userInt;
+     //calling display func.
+     SearchArray(intArray, NUMBERS, userInt);
+
+     return 0;
+}
+//declaring void func to display #'s in the array
+ void SearchArray(int array[], int numElem, int Targ)
+
+{
+ int index;
+ int numMatch = 0;
+
+for(index = 0; index < numElem; ++index)
+  {
+   if(array[index]==Targ)
+    {
+    cout<<Targ<<" found in " <<index<<endl;
+    ++numMatch;
+    }
+  }
+  //stdout statement to display #'s
+  cout<<" The total occurrence of this entry "<<Targ<<" is "<< numMatch<<endl;
+}

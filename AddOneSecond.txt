@@ -1,0 +1,220 @@
+// ============================================================================
+// File: addonesecond.cpp (Fall 2015)
+// ============================================================================
+// Programmer: Malka Lazerson
+// Date:10/21/15
+// Class: CSCI 123 ("Intro to Programming Using C++")
+// Time: 11:45am-1:50pm
+// Instructor: Mr. Edwards
+// Project: AddOneSecond.cpp
+//
+// Description:
+//  This program prompts the user for the hour, minutes and seconds values for
+//  a 24-hour time. If the time entered is valid, then one second is added to
+//  it and the new time is displayed to stdout.
+//
+//  Note that the time is entered in HH:MM:SS format, otherwise it is
+//  considered invalid.
+//
+// Sample runs:
+//      #1
+//      Please enter the time in HH:MM:SS format: 13:43:59
+//      The incremented time is 13:44:00
+//
+//      #2
+//      Please enter the time in HH:MM:SS format: 23:59:59
+//      The incremented time is 00:00:00
+//
+//      #3
+//      Please enter the time in HH:MM:SS format: 12 24 33
+//      Invalid input...
+//
+// ============================================================================
+
+#include    <iostream>
+#include    <iomanip>
+#include    <cstdlib>
+using namespace std;
+
+
+// structure declaration
+struct Time
+{
+int    hours;
+int    minutes;
+int    seconds;
+};
+
+
+
+// defined constants
+const   int MAX_HOURS = 23;
+const   int MAX_MINS = 59;
+const   int MAX_SECS = 59;
+
+
+// function prototypes
+void    AddOneSecond(Time  &timeParam);
+bool    GetTime(Time  &timeParam);
+void    DisplayTime(const Time  &timeParam);
+bool    IsTimeValid(const Time  &timeParam);
+
+
+
+// ==== main ==================================================================
+//
+// ============================================================================
+
+int     main(void)
+{
+    Time        userTime;
+    int         hours;
+    int         minutes;
+    int         seconds;
+
+    cout << "Please enter the time in HH:MM:SS format: ";
+
+    if ((false == GetTime(userTime))  ||  (false == IsTimeValid(userTime)))
+    {
+        cout << "Invalid input..." << endl;
+        exit(EXIT_FAILURE);
+        }
+
+   // display the incremented time
+    cout << "The incremented time is ";
+    AddOneSecond(userTime);
+    DisplayTime(userTime);
+    return 0;
+
+}  // end of main
+
+
+
+
+//===============GetTime=======================================================
+//
+// This function extracts the integer values and assigns them to the
+// appropriate members of a Time structure.
+//
+// Input: User time in hh:mm:ss
+//
+// Output: True if the time is valid and False if not.
+//
+// =============================================================================
+bool    GetTime(Time &timeParam)
+{
+    char inTime;
+
+     if (!(cin>>timeParam.hours))
+        {
+         return false;
+        }
+
+         cin.get(inTime);
+
+         if (':'!= inTime)
+            {
+             return false;
+            }
+     if (!(cin>>timeParam.minutes))
+        {
+         return false;
+        }
+
+         cin.get(inTime);
+
+         if(':'!= inTime)
+           {
+            return false;
+           }
+           if (!(cin>>timeParam.seconds))
+        {
+         return false;
+        }
+
+    return true;
+}//end of GetTime
+
+
+//==================IsTimeValid================================================
+//
+// This function checks to see if the time is valid or invalid. If it's valid,
+// the time struct. is passed to the "AddOneSecond" function.
+// If not, it returns false and "main" ends the program.
+//
+// Input: User time
+//
+// Output: True if valid and false if not
+//
+// =============================================================================
+bool    IsTimeValid(const Time  &timeParam)
+{
+
+    if (((timeParam.hours >= 0) && (timeParam.hours <= MAX_HOURS) &&
+       (timeParam.minutes >= 0) && (timeParam.minutes <= MAX_MINS) &&
+       (timeParam.seconds >= 0) && (timeParam.seconds <= MAX_SECS)))
+       {
+        return true;
+       }
+    else
+       {
+        return false;
+       }
+
+}//end of IsTimeValid
+
+
+//==========AddOneSecond=======================================================
+//
+// This function adds one second to the user time. It will also handle
+// time "rollover".
+//
+// Input: User time.
+//
+// Output: The new time with one second added.
+//
+//
+//
+//=============================================================================
+void    AddOneSecond(Time &timeParam)
+{
+++timeParam.seconds;
+
+     timeParam.seconds %= (MAX_SECS + 1);
+
+      if (0 == timeParam.seconds)
+         {
+          ++timeParam.minutes;
+          timeParam.minutes %= (MAX_MINS + 1);
+         }
+
+      if (0 == timeParam.hours)
+         {
+          ++timeParam.hours;
+          timeParam.hours %= (MAX_HOURS + 1);
+         }
+}//end of AddOneSecond
+
+
+
+//============DisplayTime======================================================
+//
+// This function extracts the integer values and assigns them to the
+// appropriate members of a Time structure.
+//
+// Input: User time in hh:mm:ss
+//
+// Output: Void, but displays the time.
+//
+//
+//
+// =============================================================================
+void   DisplayTime(const Time &timeParam)
+{
+     cout.fill(0);
+
+     cout<<setw(2)<<timeParam.hours<<":"
+         <<setw(2)<<timeParam.minutes<<":"
+         <<setw(2)<<timeParam.seconds<<endl;
+
+}//end of DisplayTime

@@ -1,0 +1,197 @@
+// ============================================================================
+// File: count_vowels.cpp (Fall 2015)
+// ============================================================================
+// Programmer:
+// Date:
+// Class: CSCI 123 ("Intro to Programming Using C++")
+// ============================================================================
+
+#include    <iostream>
+#include    <fstream>
+#include    <cstdlib>
+#include    <iomanip>
+#include    <cctype>
+using namespace std;
+
+
+// defined constants
+const int       LEN = 256;
+const int       WIDTH = 10;
+
+
+// structure declarations
+struct  FileInfo
+{
+    char    fname[LEN];
+    int     numA;
+    int     numE;
+    int     numI;
+    int     numO;
+    int     numU;
+    int     numY;
+    int     tVowels;
+    int     tChars;
+};
+
+
+// function prototypes
+void    CountVowels(istream  &inStream, FileInfo  &finfo);
+void    DispFileInfo(const FileInfo  &fdata);
+
+
+// ==== main ==================================================================
+//
+// ============================================================================
+int     main(void)
+{
+    auto    ifstream        myFile;
+    auto    FileInfo        info;
+
+    //initializing to zero
+    info.numA = 0;
+    info.numE = 0;
+    info.numI = 0;
+    info.numO = 0;
+    info.numU = 0;
+    info.numY = 0;
+    info.tVowels = 0;
+    info.tChars = 0;
+
+    // get a filename from the user
+    cout << "Welcome to the vowel-counting program!" << endl;
+    cout << "Please enter an input filename: ";
+    cin.getline(info.fname, LEN);
+
+    // open the file
+    myFile.open(info.fname);
+    if (myFile.fail())
+        {
+        cout << "Unable to open the input file..." << endl;
+        exit(EXIT_FAILURE);
+        }
+
+    // pass the file over to the vowel counter
+    CountVowels(myFile, info);
+
+    // display the results
+    DispFileInfo(info);
+
+    // close the file
+    myFile.close();
+    return 0;
+
+}  // end of "main"
+
+
+
+
+//===============CountVowels==================================================
+// This function receives two arguments from the caller: a reference to an
+// opened input file stream object, and a reference to a FileInfo variable.
+// Then, when it finds a char that is a vowel, it increments the appropriate
+//  member of the FileInfo variable.
+//
+// INPUT:
+//       File and reference to FileInfo variable.
+//
+// OUTPUT:
+//       The function returns nothing, but passes info to
+//       "DispFileInfo" for display.
+//
+//=============================================================================
+void    CountVowels(istream  &inStream, FileInfo  &finfo)
+{
+    char    myChar;
+
+    while(!(inStream.eof()))
+         {
+           inStream.get(myChar);
+
+           switch    (toupper(myChar))
+           {
+            case    'A':
+                        ++finfo.numA;
+                        ++finfo.tVowels;
+                        break;
+
+            case    'E':
+                        ++finfo.numE;
+                        ++finfo.tVowels;
+                        break;
+
+            case    'I':
+                        ++finfo.numI;
+                        ++finfo.tVowels;
+                        break;
+
+            case    'O':
+                       ++finfo.numO;
+                       ++finfo.tVowels;
+                       break;
+            case    'U':
+                        ++finfo.numU;
+                        ++finfo.tVowels;
+                        break;
+            case    'Y':
+                        ++finfo.numY;
+                        ++finfo.tVowels;
+                        break;
+            default:
+                    ++finfo.tChars;
+                    break;
+          }
+
+
+
+         }
+
+}
+
+
+
+
+//===============DispFileInfo==================================================
+//
+// This function receives one argument from the caller, a FileInfo variable
+// that has all the vowel data from the file. With that single structure
+// argument, the function can then generate the output.
+//
+// INPUT:
+//       Info from "CountVowels"
+//
+// OUTPUT:
+//       Nothing. Displays total vowels for each memeber and total chars read.
+//
+//
+//
+//=============================================================================
+void    DispFileInfo(const FileInfo  &fdata)
+{
+
+     cout<<" Stats for this file...."<<endl;
+     cout<<endl;
+
+     cout<<" Total A's: "<<setw(WIDTH)<<fdata.numA<<endl;
+     cout<<" Total E's: "<<setw(WIDTH)<<fdata.numE<<endl;
+     cout<<" Total I's: "<<setw(WIDTH)<<fdata.numI<<endl;
+     cout<<" Total O's: "<<setw(WIDTH)<<fdata.numO<<endl;
+     cout<<" Total U's: "<<setw(WIDTH)<<fdata.numU<<endl;
+     cout<<" Total Y's: "<<setw(WIDTH)<<fdata.numY<<endl;
+     cout<<" Total vowels: "<<setw(WIDTH-3)<<fdata.tVowels<<endl;
+     cout<<" File size: "<<setw(WIDTH)<<fdata.tChars<<endl;
+
+     cout.setf(ios::fixed);
+     cout.setf(ios::showpoint);
+     cout.precision(2);
+
+     cout<<" Total percentage of vowels is "<<(fdata.tVowels)/(fdata.tChars)<<"% ."<<endl;
+
+}
+
+
+
+
+
+
+
+

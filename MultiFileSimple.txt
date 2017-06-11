@@ -1,0 +1,62 @@
+Date.cpp
+#include <iostream>
+#include "Date.h"
+using namespace std;
+
+void GetDate(Date &dateVal)
+{
+
+ cout<<" Month: ";
+ cin>>dateVal.month;
+
+ cout<< " Day: ";
+ cin>>dateVal.day;
+
+ cout<<" Year: ";
+ cin>>dateVal.year;
+
+}
+
+void DisplayDate(const Date &dateVal)
+{
+ cout<<" The date is  "
+ <<dateVal.month<<" / "
+ <<dateVal.day<<  " / "
+ <<dateVal.year<<endl;
+
+}
+
+
+Date.h
+
+struct Date
+ {
+  int month;
+  int day;
+  int year;
+ };
+
+ void GetDate(Date &dateVal);
+ void DisplayDate(const Date &dateVal);
+
+main.cpp
+
+#include <iostream>
+#include "Date.h"
+using namespace std;
+
+int main()
+
+{
+ Date myDate;
+
+ GetDate(myDate);
+ DisplayDate(myDate);
+
+ return 0;
+
+ }
+
+
+
+

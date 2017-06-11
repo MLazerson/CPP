@@ -1,0 +1,100 @@
+
+#include    <iomanip>
+#include    <cstdlib>
+using namespace std;
+
+struct Date
+{
+ int month;
+ int day;
+ int year;
+};
+
+int ReadDates(ifstream &inFile, Date myArray[], int NUMDATES);
+void  WriteDates(ofstream &outFile, Date secArray[], int NUMDATES);
+
+
+// defined constants
+const     int       BUFLEN = 256;
+const     int       NUMDATES = 50;
+
+
+// ==== main ==================================================================
+//
+// ============================================================================
+
+int     main()
+{
+    Date        myDates[NUMDATES];
+    ifstream    inputFile;
+    ofstream    outputFile;
+    char        buf[BUFLEN];
+    int         numRecs;
+
+    // get a filename from the user and open the input file
+    cout << "Please enter the name of the input file: ";
+    cin.getline(buf, BUFLEN);
+    inputFile.open(buf);
+    if (inputFile.fail())
+        {
+        cout << "Unable to open the input file..." << endl;
+        exit(EXIT_FAILURE);
+        }
+
+    // get a filename from the user and open the output file
+    cout << "Please enter the name of the output file: ";
+    cin.getline(buf, BUFLEN);
+    outputFile.open(buf);
+    if (outputFile.fail())
+        {
+        cout << "Unable to open the output file..." << endl;
+        inputFile.close();
+        exit(EXIT_FAILURE);
+        }
+
+    // populate the array with date data
+    numRecs = ReadDates(inputFile, myDates, NUMDATES);
+    cout << numRecs << " dates read from the input file." << endl;
+
+    // write the array contents to the output file
+    WriteDates(outputFile, myDates, NUMDATES);
+    cout << "All records written to the output file." << endl;
+
+    // close the files
+    inputFile.close();
+    outputFile.close();
+    return 0;
+
+}  // end of "main"
+
+int ReadDates(ifstream &inFile, Date myArray[], int NUMDATES)
+
+{
+ int myIndex;
+
+ for(myIndex=0;myIndex<NUMDATES ;++myIndex)
+  {
+  if((!(inFile>>myArray[myIndex].month))
+   ||((inFile>>myArray[myIndex].day))
+||((inFile>>myArray[myIndex].year)))
+   {
+    return myIndex;
+   }
+  }
+}
+
+void WriteDates(ofstream &outFile, Date secArray[], int NUMDATES)
+{
+ int myIndex;
+
+ outFile.fill('0');
+
+  for(myIndex=0;myIndex<NUMDATES;++myIndex)
+  {
+   outFile<<setw(2)<<secArray[myIndex].month<<" / "
+   <<setw(2)<<secArray[myIndex].day<<" / "
+   <<setw(2)<<secArray[myIndex].year<<endl;
+  }
+}
+
+

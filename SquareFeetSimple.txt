@@ -1,0 +1,64 @@
+// squarefeet.cpp
+// Malka Lazerson
+// 2/24/14
+// TR 11:45am-1:50pm
+// Instr. S Edwards
+// HW06
+// Descript: This program calculates the total square feet in a house.
+
+ #include <iostream>
+ using namespace std;
+
+// my prototypes
+  double CalcSquareFeet(int numRoom);
+  double CalcArea(double lengthVal, double widthVal );
+
+ // Main //
+
+  int main()
+  {
+    int tRoom;
+    double tArea;
+   // setting up specifications
+    cout.setf(ios:: fixed);
+    cout.setf(ios:: showpoint);
+    cout.precision(4);
+  // asking for # of rooms
+    cout<<"How many rooms?";
+    cin>> tRoom;
+  //calling func
+    tArea= CalcSquareFeet(tRoom);
+    cout<<"The total square footage of the house is "<<tArea<<endl;
+
+     return 0;
+
+  }
+
+  // calculating area
+  double CalcArea(double lengthVal, double widthVal)
+  {
+   return lengthVal, widthVal;
+  }
+  // calculating sqr footage
+  double CalcSquareFeet(int numRoom)
+  {
+   int counter=1;
+   double length;
+   double  width;
+   double total=0;
+ // this loop gets info on the rooms and does the calculation
+    while(counter<= numRoom)
+    {cout<<"Room # :"<<counter<<endl;
+     cout<<" Enter lenght: ";
+     cin>> length;
+     cout<<"Enter width";
+     cin>> width;
+
+     total = total + CalcArea(length, width);
+     ++ counter;
+    }
+
+     return total;
+
+  }
+

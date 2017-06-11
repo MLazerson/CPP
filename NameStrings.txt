@@ -1,0 +1,112 @@
+
+// ============================================================================
+// file: namestring.cpp
+// ============================================================================
+// Programmer: Malka Lazerson
+// Date: 10/14/15
+// Class: CSCI 123
+// Time: TR 11:45am
+// Instructor: Mr. Edwards
+// Project: Name stringa
+//
+// Description:A program that prompts the user for a first name, middle name
+// and last name. Each name string is to be saved in its own character array
+// A full name string copies the first name to a fourth array, and
+// concatenating the middle and last names. It also displays the total number
+// of characters in the full name (not counting the blank space) and compares
+// each of the name components to see if any of them are identical.
+// If they are, it displays a message telling the user this.
+//
+// ============================================================================
+#include <iostream>
+#include <stdlib.h>
+#include <cstring>
+#include <cctype>
+using namespace std;
+
+// ==== main ==================================================================
+//
+// ============================================================================
+int main()
+{
+     //declaring arrays to hold name data
+     char     fName[30];
+     char     mName[30];
+     char     lName[30];
+     char     fullName[90];
+
+      cout<<" Enter your first name: ";
+      cin>>fName;
+
+      cout<<" Enter your middle name: ";
+      cin>>mName;
+
+      cout<<" Enter your last name: ";
+      cin>>lName;
+
+      //copy first name to full name array and for the rest
+      strcpy(fullName, fName);
+      //append full name and same for the rest
+      strcat(fullName," ");
+      strcat(fullName, lName);
+
+      //displaying full name
+      cout<<"  Your full name is "<<fullName<<endl;
+
+      //gets total and subtracs the two spaces
+      cout<<"  The total number of characters in your name is: ";
+      cout<<strlen(fullName)-2<<endl;
+
+      //comparing first, middle, and last  names
+      if      (strcmp(fName, mName)==0)
+              {
+               cout<<"  Your first and middle names are the same."<<endl;
+
+                if (strcmp(fName, lName)==0)
+                   {
+                    cout<<"  Your first and last names are the same."<<endl;
+                   }
+                 if (strcmp(mName, lName)==0)
+                   {
+                    cout<<"  Your middle and last names are the same."<<endl;
+                   }
+
+              }
+ else if (strcmp(fName, lName)==0)
+              {
+               cout<<"  Your first and last names are the same."<<endl;
+
+                if (strcmp(fName, mName)==0)
+                   {
+                    cout<<"  Your first and middle names are the same."<<endl;
+                   }
+                 if (strcmp(mName, lName)==0)
+                    {
+                     cout<<"  Your middle and last names are the same."<<endl;
+                    }
+              }
+      else if (strcmp(mName, lName)==0)
+              {
+               cout<<"  Your middle and last names are the same."<<endl;
+
+                if (strcmp(mName, fName)==0)
+                  {
+                   cout<<"  Your middle and first names are the same."<<endl;
+                  }
+
+                 if (strcmp(fName, lName)==0)
+                    {
+                     cout<<"  Your firts and last names are the same."<<endl;
+                    }
+
+              }
+
+      else
+              {
+           cout<<"  Your first, middle, and last names are all different."
+               <<endl;
+              }
+
+return 0;
+
+}//end of "main"

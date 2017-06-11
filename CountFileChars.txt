@@ -1,0 +1,208 @@
+// ============================================================================
+// File: count_file_chars.cpp (Fall 2015)
+// ============================================================================
+// Programmer: Malka Lazerson (Maddy)
+// Date:
+// Class: CSCI 123 ("Intro to Programming Using C++")
+// Time:
+// Instructor: Prof. Edwards
+// Project: CountFileChars
+//
+// This program prompts the user for a filename to open for reading. If the
+// input file is successfully opened, it is passed to the CountChars function,
+// which reads the file character by character. As each character is read, its
+// ASCII integer value is used as an index into an array of integers so that
+// the target array element can be incremented. The result is that by the time
+// EOF is reached, the array will have an accurate count of each individual
+// character read from the input file. After all the characters have been
+// counted, the array is passed to the DispCounters function to display the
+// results to stdout.
+// ============================================================================
+// Sample program run:
+//
+//      Please enter the name of a file to examine: foo.txt
+//      Here are the ASCII character counters:
+//      [ ] -- 2289     [!] -- 1        ["] -- 23
+//      [#] -- 5        [$] -- 1        [%] -- 1
+//      [&] -- 5        ['] -- 9        [(] -- 29
+//      [)] -- 29       [*] -- 1        [+] -- 9
+//      [,] -- 27       [-] -- 205      [.] -- 25
+//      [/] -- 236      [0] -- 39       [1] -- 24
+//      [2] -- 25       [3] -- 17       [4] -- 9
+//      [5] -- 8        [6] -- 9        [7] -- 12
+//      [8] -- 6        [9] -- 2        [:] -- 11
+//      [;] -- 40       [<] -- 41       [=] -- 742
+//      [>] -- 8        [?] -- 1        [@] -- 1
+//      [A] -- 27       [B] -- 2        [C] -- 45
+//      [D] -- 10       [E] -- 19       [F] -- 19
+//      [G] -- 1        [H] -- 6        [I] -- 35
+//      [J] -- 1        [K] -- 1        [L] -- 7
+//      [M] -- 11       [N] -- 12       [O] -- 10
+//      [P] -- 2        [Q] -- 1        [R] -- 2
+//      [S] -- 17       [T] -- 15       [U] -- 5
+//      [V] -- 1        [W] -- 3        [X] -- 9
+//      [Y] -- 1        [Z] -- 1        [[] -- 110
+//      [\] -- 2        []] -- 110      [^] -- 1
+//      [_] -- 16       [`] -- 1        [a] -- 267
+//      [b] -- 24       [c] -- 167      [d] -- 89
+//      [e] -- 405      [f] -- 75       [g] -- 22
+//      [h] -- 149      [i] -- 210      [j] -- 4
+//      [k] -- 4        [l] -- 127      [m] -- 69
+//      [n] -- 257      [o] -- 191      [p] – 64
+//      [q] -- 3        [r] -- 255      [s] -- 171
+//      [t] -- 366      [u] -- 145      [v] -- 14
+//      [w] -- 16       [x] -- 13       [y] -- 35
+//      [z] -- 1        [{] -- 11       [|] -- 1
+//      [}] -- 11       [~] -- 2
+//      Total characters read: 7771
+// ============================================================================
+
+#include    <iostream>
+#include    <fstream>
+#include    <iomanip>
+#include    <cstdlib>
+using namespace std;
+
+// defined constants
+const   int         FNAME_LEN = 256;
+const   int         MAX_ASCII = 127;
+const   int         MAX_COLS = 3;
+const   int         WIDTH = 0;
+
+// function prototypes
+int     CountChars(ifstream  &inFile, int  counters[], int  numElems);
+void    DispCounters(int  counters[], int  numElems);
+
+
+// ==== main ==================================================================
+//
+// ============================================================================
+
+int     main(void)
+{
+    int         counters[MAX_ASCII] = {0};
+    char        fname[FNAME_LEN];
+    ifstream    inputFile;
+    int         totalChars;
+
+    // get the filename from the user and open the input file
+    cout << "Please enter the name of a file to examine: ";
+    cin.getline(fname, FNAME_LEN);
+    inputFile.open(fname);
+    if (inputFile.fail())
+        {
+        cout << "Error opening the input file..." << endl;
+        exit(EXIT_FAILURE);
+        }
+
+    // count all the characters in the file
+    totalChars = CountChars(inputFile, counters, MAX_ASCII);
+    inputFile.close();
+
+    // display the results to stdout
+    DispCounters(counters, MAX_ASCII);
+cout << "Total characters read: " << totalChars << endl;
+    return 0;
+
+}  // end of "main"
+
+
+
+// ==== CountChars ============================================================
+//
+// This function reads the input file stream one character at a time. As each
+// character is read, its integer value is used as an index into the "counters"
+// array so that the corresponding counter element in the array can be
+// incremented. By the time the end-of-file has been reached, all of the file
+// characters will have been counted, and the array elements will contain the
+// count for each character. Finally, the total number of characters read is
+// returned to the caller.
+//
+// NOTE: The only characters that are counted in the array parameter are those
+//       between the space character (' ') and the tilde character ('~')
+//       inclusive. However, the function returns the absolute total number of
+//       any character read to the caller.
+//
+// Input:
+//      inFile [IN/OUT] -- a reference to an opened input file stream object
+//
+//      counters [OUT]  -- an array of integer counters, each element used
+//                         to store the total count for displayable ASCII
+//                         characters; upon entry to this function all the
+//                         array elements have presumably been set to zero
+//
+//      numElems [IN]   -- the dimension of the array parameter
+//
+// Output:
+//      The total number of all characters read from the input file stream.
+//
+// ============================================================================
+
+int     CountChars(ifstream  &inFile, int  counters[], int  numElems)
+{
+    char    myChar;
+    int     total = 0;
+    char    array;
+     do
+       {
+        inFile.get(myChar);
+
+         if(inFile.eof())
+          {
+           break;
+          }
+          ++array[myChar];
+          ++total;
+       }while(true);
+
+       return total;
+
+
+}  // end of "CountChars"
+
+
+
+// ==== DispCounters ==========================================================
+//
+// This function traverses the array parameter and uses each array element to
+// display the count for each displayable ASCII character. First an ASCII
+// character is displayed in square brackets, then the count for that character
+// is displayed to the right of that.
+//
+// Input:
+//      counters [OUT]  -- an array of integer counters, each element used
+//                         to store the total count for displayable ASCII
+//                         characters
+//
+//      numElems [IN]   -- the dimension of the array parameter
+//
+// Output:
+//      Nothing
+//
+//
+// ============================================================================
+
+void    DispCounters(int  counters[], int  numElems)
+{
+    int    index;
+    int    colCounter = 0;
+    char   array;
+       for (index = 32 ; index < numElems; ++index)
+           {
+            cout<<" ["<<static_cast<char>(index)
+                <<"]-- "
+                <<array[index]
+                <<"\t";
+
+                ++colCounter;
+
+                if(3 == colCounter)
+                  {
+                   cout<<endl;
+                   colCounter = 0;
+                  }
+           }
+         cout<<endl;
+
+
+}  // end of "DispCounters"

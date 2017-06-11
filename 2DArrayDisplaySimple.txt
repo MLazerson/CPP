@@ -1,0 +1,174 @@
+// ============================================================================
+// File: 2Darraydisplay.cpp (Fall 2015) or hw16
+// ============================================================================
+// Programmer:Malka Lazerson
+// Date: 10/28/15
+// Class: CSCI 123 ("Intro to Programming Using C++")
+// Time: 11:45am
+// Instructor: Mr. Edwards
+// Project: 2D Array Display
+//
+// Description:
+//   This program populates a two-dimensional array of integers, then asks the
+//   user what the row and column spacing should be before writing the matrix
+//   to stdout.
+//
+// Sample runs:
+// Run #1:
+//  What field width do you want to use? 3
+//  What row height do you want to use? 2
+//    0  1  2  3  4
+//
+//    5  6  7  8  9
+//
+//   10 11 12 13 14
+//
+// Run #2:
+//  What field width do you want to use? 5
+//  What row height do you want to use? 1
+//      0    1    2    3    4
+//      5    6    7    8    9
+//     10   11   12   13   14
+//
+// Run #3:
+//  What field width do you want to use? 4
+//  What row height do you want to use? 0
+//     0   1   2   3   4   5   6   7   8   9  10  11  12  13  14
+//
+// ============================================================================
+
+#include    <iostream>
+#include    <iomanip>
+#include    <cstdlib>
+using namespace std;
+
+
+// defined constants
+const   int         ROWS = 3;
+const   int         COLS = 5;
+
+
+// function prototypes
+void     DispMatrix(int array[][COLS], int ROWS, int height, int width);
+void     InitMatrix(int array[][COLS], int ROWS);
+
+
+// ==== main ==================================================================
+//
+// ============================================================================
+
+int     main(void)
+{
+//creating matrix...
+    auto    int         myInts[ROWS][COLS] = { {1,2,3,4,5}, {6,7,8,9,10},
+                                               {11,12,13,14,15}  };
+    auto    int         userHeight;
+    auto    int         userWidth;
+
+
+    // intialize the 2D array
+    InitMatrix(myInts, ROWS);
+
+    // get the field width from the user
+    cout << " What field width do you want to use? ";
+    if (!(cin >> userWidth))
+        {
+        cerr << " Error reading width..." << endl;
+        exit(EXIT_FAILURE);
+        }
+
+    // get the row height from the user
+    cout << " What row height do you want to use? ";
+    if (!(cin >> userHeight))
+        {
+        cerr << " Error reading height..." << endl;
+        exit(EXIT_FAILURE);
+        }
+
+    // display the 2D array
+    DispMatrix(myInts, ROWS, userHeight, userWidth);
+    return 0;
+
+}  // end of "main"
+
+
+
+// ==== DispMatrix ============================================================
+//
+// This function writes the two-dimensional array parameter to stdout in row /
+// column format. It uses the height and width parameters to provide row and
+// column spacing, respectively.
+//
+// Input:
+//      matrix [IN]  -- the base address of a two-dimensional array of integers
+//
+//      numRows [IN] -- the number of rows in the matrix parameter
+//
+//      height [IN] -- the number of rows each one-dimensional array should
+//                     occupy
+//
+//      width [IN]  -- the field width for each integer displayed
+//
+// Output:
+//      Nothing
+//
+// ============================================================================
+
+void    DispMatrix(int array[][COLS], int ROWS, int height, int width)
+{
+//declaring variables
+    int    numRows;
+    int    numCols;
+
+//for loop to display matrix
+    for (numRows = 0; numRows < ROWS; ++numRows)
+        {
+         for (numCols = 0; numCols < COLS; ++numCols)
+             {
+              cout<<" "<<setw(width)<<array[numRows][numCols]<<"";
+             }
+          cout<<endl;
+
+          if (height)
+             {
+              cout<<endl;
+             }
+        }
+
+}  // end of "DispMatrix"
+
+
+
+// ==== InitMatrix ============================================================
+//
+// This function initializes the two-dimensional array parameter with
+// sequentially increasing integer values, beginning with zero.
+//
+// Input:
+//      matrix [OUT] -- the base address of a two-dimensional array of integers
+//
+//      numRows [IN] -- the number of rows in the matrix parameter
+//
+// Output:
+//      Nothing
+//
+// ============================================================================
+void    InitMatrix(int array[][COLS], int ROWS)
+{
+// declaring variables
+    int    numRows;
+    int    numCols;
+
+// initializing premade matrix by using for loops
+     for (numRows = 0; numRows < ROWS; ++numRows)
+         {
+          for (numCols = 0; numCols < COLS; ++numCols)
+              {
+              // empty because no need to display matrix here.
+              }
+         }
+
+}  // end of "InitMatrix"
+
+
+

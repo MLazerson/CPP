@@ -1,0 +1,93 @@
+// ============================================================================
+// file: megacalc.cpp
+// ============================================================================
+// Programmer: Malka Lazerson
+// Date: 09/23/2015
+// Class: CSCI 123 ("Intro to Programming Using C++")
+// Time: TR 11:45am
+// Instructor: Mr. Edwards
+// Project: megacalc
+//
+// Description:
+//      This program prompts the user for two integer values. These  values
+//      are passed to the CalcIntResults function, which will get the sum,
+//      difference, product, and quotient with remainder all in 1 function call.
+//      It uses formal parameters that are reference variables to return more
+//      than one value.
+//
+// ============================================================================
+
+#include <iostream>
+using namespace std;
+
+void CalcIntResults(int intOne, int intTwo, int &sum, int &subtract, int &product, int &quotient, int &remainder);
+
+//========main=================================================================
+//
+//============================================================================
+int main()
+{
+    int intOne;
+    int intTwo;
+    int sum;
+    int subtract;
+    int product;
+    int quotient;
+    int remainder;
+
+    cout<<" Please enter two integers separated by a space: ";
+    cin>> intOne >> intTwo;
+
+    CalcIntResults( intOne, intTwo, sum, subtract, product, quotient, remainder);
+
+     cout<<"  " << intOne <<" + "<< intTwo <<" = "<< sum <<endl;
+     cout<<"  " << intOne <<" - "<< intTwo <<" = "<< subtract <<endl;
+     cout<<"  " << intOne <<" x "<< intTwo <<" = "<< product <<endl;
+
+//for dividing by zero
+     if( intTwo == 0)
+      {
+       cout<<" Undefined! Cannot divide by zero."<<endl;
+      }
+else
+     {
+      cout<<"  "<< intOne << " / " << intTwo << " = "<< quotient
+      << " with a remainder of "<< intOne % intTwo <<"."<< endl;
+     }
+
+    return 0;
+}
+
+
+
+//=========CalcIntResults==================================================
+//This function will derive the sum, difference, product, and quotient
+//with remainder. If uses reference variables to return the values.
+//
+//Input:
+//      Two int variables from main entered by the user.
+//
+//Output:
+//      Void. Returns results to main passing by reference.
+//
+//=========================================================================
+void CalcIntResults(int intOne, int intTwo, int &sum, int &subtract, int &product, int &quotient, int &remainder)
+{
+
+  sum = intOne + intTwo;
+subtract = intOne - intTwo;
+  product = intOne * intTwo;
+
+//dividing by zero
+  if(intTwo == 0)
+  {
+  }
+  else
+  {
+   quotient = intOne / intTwo;
+  }
+
+
+}
+
+

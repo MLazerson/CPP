@@ -1,0 +1,218 @@
+Procedural 
+struct Date
+{
+   int    m_month;
+   int    m_day;
+   int    m_year;
+};
+
+   void    GetDate(Date &dateVal);
+   void    DispDate(const Date &dateVal);
+
+
+//=============================================================================
+// file: date.cpp
+// ============================================================================
+// Programmer: Malka Lazerson
+// Date: 11/8/2015
+// Class: CSCI 123 ("Intro to Programming Using C++")
+// Time: TR 11:45am
+// Instructor: Mr. Edwards
+// Project: Multiple Modules
+//
+// Description:
+//      Gets the date from the user using members from the "date" struct.
+//      Gets and displays a date.
+//
+// ============================================================================
+#include <iostream>
+#include "date_pr.h"
+using namespace std;
+
+//==========================GetDate============================================
+//
+// Functions gets a date from the user.
+//
+// Input: Members of "date" struct
+//
+// Output: None.
+//
+//=============================================================================
+void    GetDate(Date &dateVal)
+{
+
+    cout<<" Month: ";
+    cin>>dateVal.m_month;
+
+    cout<< " Day: ";
+    cin>>dateVal.m_day;
+
+    cout<<" Year: ";
+    cin>>dateVal.m_year;
+
+}// end of GetDate
+
+
+
+
+//=============================================================================
+//
+// Function displays date in mm/dd/yy format.
+//
+// Input: Date from GetDate.
+//
+//
+// Output: Nothing
+//
+//=============================================================================
+void DispDate(const Date &dateVal)
+{
+    cout<<" The date is  "
+    <<dateVal.m_month<<" / "
+    <<dateVal.m_day<<  " / "
+    <<dateVal.m_year<<endl;
+}
+
+
+//=============== =============================================================
+// file: main.cpp
+// ============================================================================
+// Programmer: Malka Lazerson
+// Date: 11/8/2015
+// Class: CSCI 123 ("Intro to Programming Using C++")
+// Time: TR 11:45am
+// Instructor: Mr. Edwards
+// Project: Multiple Modules
+//
+// Description:
+//      Procedural sample for multiple modules, using header files, and more.
+//      Calls functions and contains class and object for "Date" struct
+//
+// ============================================================================
+#include <iostream>
+#include "date_pr.h"
+using namespace std;
+
+
+//=========main================================================================
+//
+//=============================================================================
+int main()
+{
+// class    object
+    Date    myDate;
+// function calls/function members of "date" struct
+    GetDate(myDate);
+    DispDate(myDate);
+
+    return 0;
+
+}// end of "main"
+
+
+OBJECT OR. PROGRAMMING
+
+// ============================================================================
+// file: main.cpp
+// ============================================================================
+// Programmer: Malka Lazerson
+// Date: 11/8/2015
+// Class: CSCI 123 ("Intro to Programming Using C++")
+// Time:TR 11:45am
+// Instructor: Mr. Edwards
+// Project: Multiple Modules
+//
+// Description:
+//      This program is a the "main" for the sample program shown in class.
+//      It just calls the functions and has the object, class, & header file.
+//
+// ============================================================================
+#include <iostream>
+#include "date_oo.h"
+using namespace std;
+
+int main()
+{
+//  class   object
+    Date    myDate;
+
+// calling object and member functions
+    myDate.GetDate();
+    myDate.DispDate();
+
+    return 0;
+
+}// end of main
+// ============================================================================
+// file: date.cpp
+// ============================================================================
+// Programmer: Malka Lazerson
+// Date: 11/8/2015
+// Class: CSCI 123 ("Intro to Programming Using C++")
+// Time: TR 11:45am
+// Instructor: Mr. Edwards
+// Project: Multiple Modules
+//
+// Description:
+//      This program is an implementation and example of the class example
+//      on working with header files, multiple modules, and more.
+//      This is the part with all the working functions.
+//
+// ============================================================================
+#include <iostream>
+#include "date_oo.h"
+using namespace std;
+
+//========================GetDate==============================================
+// Function uses members from a struct to store a date.
+// It uses a header file that contains the struct.
+//
+// Input: The variable "dateVal".
+//
+// Output: Nothing
+//
+//============================================================================
+
+void   Date::GetDate()
+{
+
+     cout <<" Enter month: ";
+     cin >>m_month;
+     cout <<" Enter day: ";
+     cin >>m_day;
+     cout <<" Enter year: ";
+     cin >>m_year;
+
+}//end of GetDate
+
+
+
+//==========DispDate==========================================================
+// Function displays date entered by the user.
+// The date is stored in "dateVal" and passed here to be displayed.
+//
+// Input: "dateVal"
+//
+// Output: Nothing
+//
+//=============================================================================
+void    Date::DispDate()
+{
+    cout<<" The date is..."<<m_month<<"/"<<m_day<<"/"<<m_year<<endl;
+}
+
+
+struct Date
+{
+ int   m_month;
+ int   m_day;
+ int   m_year;
+
+ void    GetDate();
+ void    DispDate();
+};
+
+
+
+
+

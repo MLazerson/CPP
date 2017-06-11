@@ -1,0 +1,101 @@
+// ============================================================================
+// file: searcharray.cpp
+// ============================================================================
+// Programmer: Malka Lazerson
+// Date: 10/11/15
+// Class: CSCI 123
+// Time: TR 11:45am
+// Instructor: Mr. Edwards
+// Project: Arrays
+//
+// Description: Program accepts 10 ints an input into an array. "Main" calls
+//              the function "SearchArray" to find  where an integer entered
+//              by the user is located. Then the functions displays where the
+//              integers are located (example:"8 was found in  index 3.").
+//              It then counts and displays how many times the integer
+//              was found.
+//
+// ============================================================================
+
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+ // prototypes
+ void     SearchArray(int array[],int numElems,int targetVal);
+ // declaring const for array size
+ const int NUM_INTS = 10;
+
+// ==== main ==================================================================
+//
+// ============================================================================
+int main()
+{
+    // declaring variables
+    int    userInt;
+    int    integers[NUM_INTS];
+    int    index;
+    int    targetVal;
+    // asking for 10 ints
+    cout<<" Enter 10 integers:"<<endl;
+    // filling array
+    for (index = 0 ; index < NUM_INTS ; ++index)
+        {
+         cout<<"  #"<<index+1<<" ";
+         cin>>integers[index];
+        }
+    // getting value
+    cout<<" Enter a search value: ";
+    cin>> targetVal;
+
+    // calling SearchArray
+    SearchArray(integers, NUM_INTS, targetVal);
+
+
+return 0;
+
+}    // end of "main"
+
+
+
+//=============================================================================
+//
+// This function asks the user to input a integer they put into an array
+// previously in "Main". The functions finds the location of the integer in
+// memory (an index in this case) and displays the number and the location in
+// a cout statement.It then counts and displays how many times the integer
+// was found.
+//
+// Input:
+//       An array argument, the number of elements in the array, and a integer
+//       to find and display. All this is from "Main" which calls this function.
+//
+// Output:
+//        The integer sent by "main" and the location of said integer
+//        and how many times the integer was found.
+//
+// ============================================================================
+void SearchArray(int array[],int numElems, int targetVal)
+{
+    // declaring variables
+    int    index;
+    int    tOccur = 0;
+
+    // for loop to search for value, display it &
+    // count how many times it occurs
+      for (index = 0; index < numElems ; ++index)
+          {
+           if (array[index]==targetVal)
+              {
+              cout<<"  "<<targetVal<<" was found at index "<<index<<endl;
+              // add to running total
+              ++tOccur;
+              }
+
+          }
+    //display info
+    cout<<"  The number of times your value occured was "<<tOccur<<" time(s)."
+             <<endl;
+
+}    // end of "SearchArray"
+
+
